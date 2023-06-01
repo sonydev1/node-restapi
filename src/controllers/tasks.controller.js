@@ -1,16 +1,26 @@
 import Task from "../models/task.model.js";
 
-export async function getAll(_req, res) {
-  const tasks = await Task.find({});
-  res.json(tasks);
+ async function getAll(_req, res) {
+  try {
+    const tasks = await Task.find();
+   res.status(200).json(tasks);
+  } catch (error) {
+    res.json(error);
+  }
 }
 
-export async function getTask(req, res) {
-  const task = await Task.findById(req.params.id);
-  res.json(task);
+ async function getTask(req, res) {
+  try {
+    const id = req.params.id;
+    const task = await Task.findById(id);
+     res.status(200).json(task);
+    
+  } catch (error) {
+    res.json(error);
+  }
 }
 
-export async function createTask(req, res) {
+ async function createTask(req, res) {
   try {
     
     const { title, description, done } = req.body;
@@ -27,18 +37,31 @@ export async function createTask(req, res) {
   }
 }
 
-export async function updateTask(req, res) {
+ async function updateTask(req, res) {
   try {
     const taskUpdate = await Task.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
     });
-    res.status(204).json(taskUpdate);
+    res.status(200).json({
+      message:'task updated successfully',
+      body: taskUpdate
+    });
   } catch (error) {
-    
+    res.json(error);
   }
 }
 
-export async function deleteTask(req, res) {
-  const task = await Task.findByIdAndDelete(req.params.id);
-  res.json(task);
+ async function deleteTask(req, res) {
+  try {
+    const task = await Task.findByIdAndDelete(req.params.id);
+  res.status(200).json({
+    message:'task destroyed successfully',
+    body: task
+  });
+  } catch (error) {
+    res.json(error);
+  }
 }
+
+
+export{getAll,getTask,createTask,updateTask,deleteTask}
