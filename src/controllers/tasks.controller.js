@@ -1,6 +1,6 @@
 import Task from "../models/task.model.js";
 
- async function getAll(_req, res) {
+ async function getAll(req, res) {
   try {
     const tasks = await Task.find();
    res.status(200).json(tasks);
