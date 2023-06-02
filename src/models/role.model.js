@@ -1,14 +1,13 @@
-import { Schema,model } from "mongoose";
+import { Schema, model } from 'mongoose'
 
-const roleSchema = new Schema({ 
-    name: String,
-    
-},{
-    timestamps: true,
-    versionKey: false
+const roleSchema = new Schema({
+  name: String
+
+}, {
+  timestamps: true,
+  versionKey: false
 })
 
-
-const Role = model('Role',roleSchema)
+const Role = model('Role', roleSchema)
 
 export default Role
