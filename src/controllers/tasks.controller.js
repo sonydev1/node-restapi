@@ -31,7 +31,8 @@ async function createTask (req, res) {
     })
     res.status(201).json({
       message: 'task created successfully',
-      userId
+      userId,
+      body: [{title:title, description:description, done:done}],
     })
   } catch (error) {
     res.json(error)
